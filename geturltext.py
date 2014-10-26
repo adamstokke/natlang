@@ -24,6 +24,13 @@ def geturltext(url):
     text = nltk.Text(tokens)
     print 'collocations: ', text.collocations()
 
+    words = [w.lower() for w in text]
+    vocab = sorted(set(words))
+
+    print "# of unique words: ", len(vocab), '\n'
+
+    #print vocab
+
     
 
 
