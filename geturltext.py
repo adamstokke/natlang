@@ -19,12 +19,19 @@ def geturltext(url):
 
     tokens = nltk.word_tokenize(doc.get_text())
     print "# of tokens: ", len(tokens)
-    #print tokens[:25]
 
     text = nltk.Text(tokens)
     print 'collocations: ', text.collocations()
 
-    words = [w.lower() for w in text]
+    # here, prune the words by getting rid of code bits that show
+    # up as words (see nltk book 3.4, etc.)
+    somewords = [w for w in text if "=" not in w]
+    somewords = [w for w in somewords if "." not in w]
+    somewords = [w for w in somewords if "_" not in w]
+    somewords = [w for w in somewords if "+" not in w]
+    somewords = [w for w in somewords if "/" not in w]
+    
+    words = [w.lower() for w in somewords]
     vocab = sorted(set(words))
 
     print "# of unique words: ", len(vocab), '\n'
